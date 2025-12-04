@@ -6,3 +6,10 @@ export default {
   },
   plugins: [],
 };
+
+extend: {
+  colors: {
+    neon: "#a855f7"
+  }
+}
+

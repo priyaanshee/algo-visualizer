@@ -10,7 +10,8 @@ function App() {
       <Navbar />
       <Hero />
       <Algorithms />
-      <div className="pt-20 min-h-screen flex flex-col justify-center items-center gap-8 bg-gray-50">
+      <div className="pt-20 min-h-screen flex flex-col justify-center items-center gap-8 bg-[#08080c]">
+
         {/* Logos */}
         <div className="flex gap-10 items-center">
           <img src={viteLogo} className="h-20 w-20 animate-spin-slow drop-shadow-md" alt="Vite logo" />
