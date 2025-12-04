@@ -1,69 +1,44 @@
-export async function mergeSort(
-  array: number[],
-  setArray: (arr: number[]) => void,
-  speed: number,
-  setHighlighted?: (indices: number[]) => void
-): Promise<number[]> {
-  async function merge(
-    left: number[],
-    right: number[],
-    startIndex: number
-  ): Promise<number[]> {
-    let result: number[] = [];
-    let i = 0,
-      j = 0;
+import type { Step } from "./types";
+
+export function mergeSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  let a = [...arr];
+
+  const add = (line: number, hi: number[]) =>
+    steps.push({ array: [...a], highlightedIndices: hi, line });
+
+  function merge(l: number, m: number, r: number) {
+    let left = a.slice(l, m + 1);
+    let right = a.slice(m + 1, r + 1);
+    let i = 0, j = 0, k = l;
+
+    add(0, [l, r]);
 
     while (i < left.length && j < right.length) {
-      if (setHighlighted)
-        setHighlighted([startIndex + i, startIndex + j + left.length]);
-      await new Promise((res) =>
-        setTimeout(res, Math.max(80, 1000 - speed))
-      );
-
-      if (left[i] < right[j]) {
-        result.push(left[i++]);
+      add(1, [k]);
+      if (left[i] <= right[j]) {
+        a[k++] = left[i++];
       } else {
-        result.push(right[j++]);
+        a[k++] = right[j++];
       }
-
-      const updated = [
-        ...array.slice(0, startIndex),
-        ...result,
-        ...left.slice(i),
-        ...right.slice(j),
-        ...array.slice(startIndex + left.length + right.length)
-      ];
-      setArray(updated);
-      array = updated;
+      add(2, [k - 1]);
     }
 
-    result = [...result, ...left.slice(i), ...right.slice(j)];
+    while (i < left.length) a[k++] = left[i++];
+    while (j < right.length) a[k++] = right[j++];
 
-    const updated = [
-      ...array.slice(0, startIndex),
-      ...result,
-      ...array.slice(startIndex + left.length + right.length)
-    ];
-    setArray(updated);
-    array = updated;
-
-    await new Promise((res) =>
-      setTimeout(res, Math.max(80, 1000 - speed))
-    );
-
-    return result;
+    add(3, [l, r]);
   }
 
-  async function divide(arr: number[], startIndex: number): Promise<number[]> {
-    if (arr.length <= 1) return arr;
-
-    const mid = Math.floor(arr.length / 2);
-    const left = await divide(arr.slice(0, mid), startIndex);
-    const right = await divide(arr.slice(mid), startIndex + mid);
-    return merge(left, right, startIndex);
+  function divide(l: number, r: number) {
+    if (l >= r) return;
+    const m = Math.floor((l + r) / 2);
+    divide(l, m);
+    divide(m + 1, r);
+    merge(l, m, r);
   }
 
-  const sorted = await divide(array, 0);
-  if (setHighlighted) setHighlighted([]);
-  return sorted;
+  divide(0, a.length - 1);
+  steps.push({ array: [...a], highlightedIndices: [], line: -1 });
+  return steps;
 }

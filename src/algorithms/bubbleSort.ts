@@ -1,25 +1,25 @@
-export async function bubbleSort(
-  array: number[],
-  setArray: (arr: number[]) => void,
-  speed: number,
-  setHighlighted?: (indices: number[]) => void
-) {
-  let arr = [...array];
+import type { Step } from "./types";
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length - i - 1; j++) {
-      // highlight compared bars
-      if (setHighlighted) setHighlighted([j, j + 1]);
-      setArray([...arr]);
-      await new Promise((r) => setTimeout(r, speed));
+export function bubbleSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  let a = [...arr];
+  const n = a.length;
 
-      if (arr[j] > arr[j + 1]) {
-        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-        setArray([...arr]);  // show swap
-        await new Promise((r) => setTimeout(r, speed));
+  const add = (line: number, highlights: number[]) =>
+    steps.push({ array: [...a], highlightedIndices: highlights, line });
+
+  for (let i = 0; i < n - 1; i++) {
+    add(0, [i]);
+    for (let j = 0; j < n - i - 1; j++) {
+      add(1, [j, j + 1]);
+      add(2, [j, j + 1]);
+      if (a[j] > a[j + 1]) {
+        [a[j], a[j + 1]] = [a[j + 1], a[j]];
+        add(3, [j, j + 1]);
       }
     }
   }
 
-  if (setHighlighted) setHighlighted([]); // remove highlight
+  steps.push({ array: [...a], highlightedIndices: [], line: -1 });
+  return steps;
 }

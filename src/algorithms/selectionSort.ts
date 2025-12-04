@@ -1,28 +1,27 @@
-export async function selectionSort(
-  array: number[],
-  setArray: (arr: number[]) => void,
-  speed: number,
-  setHighlighted?: (indices: number[]) => void
-) {
-  let arr = [...array];
+import type { Step } from "./types";
 
-  for (let i = 0; i < arr.length; i++) {
-    let minIndex = i;
+export function selectionSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  let a = [...arr];
+  const n = a.length;
 
-    for (let j = i + 1; j < arr.length; j++) {
-      if (setHighlighted) setHighlighted([minIndex, j]);
-      setArray([...arr]);
-      await new Promise((r) => setTimeout(r, speed));
+  const add = (line: number, hi: number[]) =>
+    steps.push({ array: [...a], highlightedIndices: hi, line });
 
-      if (arr[j] < arr[minIndex]) {
-        minIndex = j;
+  for (let i = 0; i < n; i++) {
+    let min = i;
+    add(0, [i]);
+    for (let j = i + 1; j < n; j++) {
+      add(1, [j, min]);
+      if (a[j] < a[min]) {
+        min = j;
+        add(2, [min]);
       }
     }
-
-    [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
-    setArray([...arr]);
-    await new Promise((r) => setTimeout(r, speed));
+    [a[i], a[min]] = [a[min], a[i]];
+    add(3, [i, min]);
   }
 
-  if (setHighlighted) setHighlighted([]);
+  steps.push({ array: [...a], highlightedIndices: [], line: -1 });
+  return steps;
 }

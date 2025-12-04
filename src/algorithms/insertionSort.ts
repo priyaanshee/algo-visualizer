@@ -1,28 +1,30 @@
-export async function insertionSort(
-  array: number[],
-  setArray: (arr: number[]) => void,
-  speed: number,
-  setHighlighted?: (indices: number[]) => void
-) {
-  let arr = [...array];
+import type { Step } from "./types";
 
-  for (let i = 1; i < arr.length; i++) {
-    let key = arr[i];
+export function insertionSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  let a = [...arr];
+
+  const add = (line: number, hi: number[]) =>
+    steps.push({ array: [...a], highlightedIndices: hi, line });
+
+  for (let i = 1; i < a.length; i++) {
+    let key = a[i];
     let j = i - 1;
 
-    while (j >= 0 && arr[j] > key) {
-      if (setHighlighted) setHighlighted([j, j + 1]);
-      arr[j + 1] = arr[j];
-      setArray([...arr]);
-      await new Promise((r) => setTimeout(r, Math.max(80, 1000 - speed)));
+    add(0, [i]);
+    add(1, [i]);
+    add(2, [j]);
+
+    while (j >= 0 && a[j] > key) {
+      add(3, [j, j + 1]);
+      a[j + 1] = a[j];
+      add(4, [j + 1]);
       j--;
     }
-
-    arr[j + 1] = key;
-    setArray([...arr]);
-    await new Promise((r) => setTimeout(r, Math.max(80, 1000 - speed)));
+    a[j + 1] = key;
+    add(5, [j + 1]);
   }
 
-  if (setHighlighted) setHighlighted([]);
-  return arr;
+  steps.push({ array: [...a], highlightedIndices: [], line: -1 });
+  return steps;
 }
