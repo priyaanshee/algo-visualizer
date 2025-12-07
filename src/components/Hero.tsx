@@ -1,22 +1,49 @@
 export default function Hero() {
   return (
-    <section className="w-full min-h-[85vh] flex flex-col justify-center items-center text-center gap-6 bg-gradient-to-b from-purple-50 to-white">
-      <h1 className="text-6xl font-extrabold text-gray-800 leading-tight">
-        Master <span className="text-purple-600">Algorithms</span> Visually
+    <div className="pt-24 min-h-screen bg-[#050010] text-white flex flex-col items-center gap-10 px-6">
+
+      <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+        Algo Visualizer
       </h1>
 
-      <p className="text-xl text-gray-600 max-w-2xl">
-        Learn how sorting and searching algorithms work with step-by-step animations and intuitive controls.
+      <p className="text-lg text-slate-300">
+        Choose a topic to explore 👇
       </p>
 
-      <div className="flex gap-6 mt-4">
-        <button className="px-8 py-3 rounded-xl bg-purple-600 text-white font-semibold text-lg hover:bg-purple-700 transition">
-          Start Visualizing
-        </button>
-        <button className="px-8 py-3 rounded-xl border border-purple-600 text-purple-600 font-semibold text-lg hover:bg-purple-600 hover:text-white transition">
-          Algorithms List
-        </button>
+      <div className="flex flex-col gap-6 text-center mt-4">
+
+        <a href="/sorting" className="px-8 py-4 rounded-xl bg-purple-600 text-xl font-semibold hover:scale-110 transition">
+          Sorting Algorithms
+        </a>
+
+        <a href="/searching" className="px-8 py-4 rounded-xl bg-pink-600 text-xl font-semibold hover:scale-110 transition">
+          Searching Algorithms
+        </a>
+
+        <a href="/stack" className="px-8 py-4 rounded-xl bg-blue-600 text-xl font-semibold hover:scale-110 transition">
+          Stack Visualization
+        </a>
+
+        <a href="/queue" className="px-8 py-4 rounded-xl bg-green-600 text-xl font-semibold hover:scale-110 transition">
+          Queue Visualization
+        </a>
+
+        <a href="/linkedlist" className="px-8 py-4 rounded-xl bg-indigo-600 text-xl font-semibold hover:scale-110 transition">
+          Linked List Visualization
+        </a>
+
+        <a href="/tree" className="px-8 py-4 rounded-xl bg-yellow-600 text-xl font-semibold hover:scale-110 transition">
+          Tree / BST Visualization
+        </a>
+
+        <a href="/graph" className="px-8 py-4 rounded-xl bg-red-600 text-xl font-semibold hover:scale-110 transition">
+          Graph Traversal (BFS / DFS)
+        </a>
+
+        <a href="/dp" className="px-8 py-4 rounded-xl bg-cyan-600 text-xl font-semibold hover:scale-110 transition">
+          Dynamic Programming
+        </a>
       </div>
-    </section>
+    </div>
   );
 }

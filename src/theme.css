@@ -1,0 +1,99 @@
+/* GLOBAL NEON THEME */
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #050010;
+  color: white;
+}
+
+/* Neon containers */
+.neon-card {
+  background: #09001b;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(236,72,153,0.2);
+  box-shadow: 0 0 35px rgba(168,85,247,0.25);
+}
+
+/* Input fields */
+.input-neon {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #110026;
+  border: 1px solid rgba(168,85,247,0.4);
+  color: white;
+  transition: 0.2s;
+}
+.input-neon:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(236,72,153,0.6);
+}
+
+/* Neon buttons */
+.btn-neon-primary {
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  transition: 0.2s;
+}
+.btn-neon-primary:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(236,72,153,0.9);
+}
+
+.btn-neon-ghost {
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(236,72,153,0.5);
+  background: transparent;
+  transition: 0.2s;
+}
+.btn-neon-ghost:hover {
+  background: rgba(236,72,153,0.1);
+  box-shadow: 0 0 10px rgba(236,72,153,0.8);
+}
+
+/* Info chips */
+.info-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #5b1f6f;
+  background: #110026;
+}
+
+/* Prev / Next step buttons */
+.step-button {
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 10px;
+  background: rgba(168,85,247,0.2);
+  border: 1px solid rgba(236,72,153,0.4);
+  transition: 0.2s;
+}
+.step-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(236,72,153,0.7);
+}
+.step-button:disabled {
+  opacity: 0.4;
+}
+
+/* Stack item style */
+.stack-item {
+  width: 180px;
+  height: 44px;
+  margin: 6px 0;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  transition: 0.25s;
+}
+.stack-item-active {
+  box-shadow: 0 0 18px rgba(236,72,153,0.9);
+}
